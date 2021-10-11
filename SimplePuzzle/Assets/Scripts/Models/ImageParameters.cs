@@ -1,6 +1,6 @@
 using System;
 
-namespace DefaultNamespace
+namespace Models
 {
     [Serializable]
     public class ImageParameters
