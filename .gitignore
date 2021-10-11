@@ -2,3 +2,71 @@
 /OpenCvPuzzleHelper/obj/
 /OpenCvPuzzleHelper/.idea/
 
+/SimplePuzzle/AssetBundles/
+/SimplePuzzle/AssetBundles/*
+
+/SimplePuzzle/Library/metadata
+/SimplePuzzle/Library/ScriptsAssemblies/*
+/SimplePuzzle/Temp
+/SimplePuzzle/obj/*
+
+.vs/*
+Assembly*
+*.csproj
+*.pidb
+*.sln
+*.userprefs
+*.user
+*.suo
+*.dwlt
+*.log
+
+
+/SimplePuzzle/Library/SharedCache.db
+/SimplePuzzle/Library/assetDatabase3
+/SimplePuzzle/Library/guidmapper
+/SimplePuzzle/Library/ScriptAssemblies/CompilationCompleted.txt
+/SimplePuzzle/Library/AssetServerCacheV3
+/SimplePuzzle/Library/InspectorExpandedItems.asset
+/SimplePuzzle/Library/expandedItems
+
+*.umbracache
+/SimplePuzzle/Assets/Bundles/UI/Sources/
+/SimplePuzzle/Assets/Bundles/Audio/Sci-Fi Music Pack.meta
+/SimplePuzzle/_ReSharper.Exowars-csharp/
+/SimplePuzzle/Library/
+/SimplePuzzle/_ReSharper.Work1-csharp/
+
+/SimplePuzzle/Assets/Temp.meta
+/SimplePuzzle/Assets/Resources/GitRevision.txt
+/SimplePuzzle/Assets/Scripts/Other/BundleManager/Resources/Urls.txt
+/SimplePuzzle/Assets/Scripts/Other/BundleManager/Resources/Urls.txt.meta
+
+# Windows image file caches
+/SimplePuzzle/Thumbs.db
+/SimplePuzzle/ehthumbs.db
+/SimplePuzzle/Thumbs.db.meta
+
+# Folder config file
+/SimplePuzzle/Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+/SimplePuzzle/.nuget/
+
+# Jetbrains rider
+/SimplePuzzle/Assets/Plugins/Editor/JetBrains*
+/SimplePuzzle/.idea/
+
+
+/SimplePuzzle/Packages/
