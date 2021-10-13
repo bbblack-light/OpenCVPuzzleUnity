@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using Emgu.CV;
@@ -8,14 +9,15 @@ namespace DefaultNamespace
 {
     public class ImageProcessing
     {
-        public static Response CutImage(ImageParameters parameters)
+        public static FullParts CutImage(ImageParameters parameters)
         {
             if (File.Exists(parameters.path))
             {
                 var mats = new List<Mat>(); // List of rois
-                var images = new List<Image<Bgr, byte>>(); // List of extracted image parts
+                var images = new List<byte[]>(); // List of extracted image parts
 
                 var image = new Image<Bgr, byte>(parameters.path);
+                Console.WriteLine();
                 
                 var height = image.Size.Height / parameters.rows;
                 var weight = image.Size.Width / parameters.cols;
@@ -25,21 +27,22 @@ namespace DefaultNamespace
                     for (int j = 0; j < parameters.rows; j++)
                     {
                         Mat roi = new Mat(image.Mat, new Rectangle(weight * i, height * j, weight, height));
-                        images.Add(roi.ToImage<Bgr, byte>());
-                        CvInvoke.Imshow("image", roi);
-                        CvInvoke.WaitKey(0);
+                        images.Add(roi.ToImage<Bgr, byte>().Bytes);
+                        // CvInvoke.Imshow("image", roi);
+                        // CvInvoke.WaitKey(0);
                     }
                 }
 
-                return new Response()
+                return new FullParts()
                 {
+                    filename = Path.GetFileNameWithoutExtension(parameters.path),
                     images = images,
                     height = height,
-                    weight = weight
+                    width = weight
                 };
             }
 
-            return new Response();
+            return new FullParts();
         }
     }
 }

@@ -6,10 +6,11 @@ using Emgu.CV.Structure;
 namespace DefaultNamespace
 {
     [Serializable]
-    public class Response
+    public class FullParts
     {
-        public List<Image<Bgr, byte>> images;
+        public string filename;
+        public List<byte[]> images;
         public int height;
-        public int weight;
+        public int width;
     }
 }
