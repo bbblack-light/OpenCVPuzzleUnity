@@ -62,9 +62,9 @@ namespace OpenCvPuzzleHelper
                         
                         file = File.Create(fullParts.filename + ".txt");
                         file.Write(Encoding.ASCII.GetBytes(resString));
-                        Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + file.Name);
-                        filename = AppDomain.CurrentDomain.BaseDirectory + file.Name;
-                        var filenameBytes = Encoding.ASCII.GetBytes(filename);
+                        Console.WriteLine(file.Name);
+                        // filename = AppDomain.CurrentDomain.BaseDirectory + file.Name;
+                        var filenameBytes = Encoding.ASCII.GetBytes(file.Name);
                         stream.Write(filenameBytes, 0, filenameBytes.Length);
                         file.Close();
                     }

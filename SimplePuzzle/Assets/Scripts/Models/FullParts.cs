@@ -7,7 +7,7 @@ namespace Models
     {
         public static Action FileNameReceived = delegate {  };
 
-        public static string filename
+        public static string Filename
         {
             get => _filename;
             set
@@ -16,9 +16,9 @@ namespace Models
                 FileNameReceived.Invoke();
             }
         } 
-        private static string _filename;
-
-        public static FullParts fullParts = new FullParts();
+        private static string _filename = string.Empty;
+        public static int cols;
+        public static int rows;
         
         public List<byte[]> images;
         public int height;

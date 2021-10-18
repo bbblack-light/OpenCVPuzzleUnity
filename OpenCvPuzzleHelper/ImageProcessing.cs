@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 
 namespace DefaultNamespace
 {
     public class ImageProcessing
     {
+        public static readonly int FixHeight = 1280 / 4 * 3;
+        public static readonly int FixWidth = 1920 / 4 * 3;
         public static FullParts CutImage(ImageParameters parameters)
         {
             if (File.Exists(parameters.path))
@@ -17,7 +20,13 @@ namespace DefaultNamespace
                 var images = new List<byte[]>(); // List of extracted image parts
 
                 var image = new Image<Bgr, byte>(parameters.path);
-                Console.WriteLine();
+                
+                Console.Write("Resized from " + image.Size.Height + "x" + image.Size.Width);
+                while (image.Size.Height > FixHeight && image.Size.Width > FixWidth)
+                {
+                    image = image.Resize(0.95, Inter.Area);
+                }
+                Console.WriteLine(" to " + image.Size.Height + "x" + image.Size.Width);
                 
                 var height = image.Size.Height / parameters.rows;
                 var weight = image.Size.Width / parameters.cols;
