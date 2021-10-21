@@ -17,7 +17,7 @@ namespace DefaultNamespace
             if (File.Exists(parameters.path))
             {
                 var mats = new List<Mat>(); // List of rois
-                var images = new List<byte[]>(); // List of extracted image parts
+                var images = new List<OneImageParams>(); // List of extracted image parts
 
                 var image = new Image<Bgr, byte>(parameters.path);
                 
@@ -30,13 +30,19 @@ namespace DefaultNamespace
                 
                 var height = image.Size.Height / parameters.rows;
                 var weight = image.Size.Width / parameters.cols;
-                
-                for (int i = 0; i < parameters.cols; i++)
+
+                var number = 0;
+                for (int i = 0; i < parameters.rows; i++)
                 {
-                    for (int j = 0; j < parameters.rows; j++)
+                    for (int j = 0; j < parameters.cols; j++)
                     {
-                        Mat roi = new Mat(image.Mat, new Rectangle(weight * i, height * j, weight, height));
-                        images.Add(roi.ToImage<Bgr, byte>().Bytes);
+                        Mat roi = new Mat(image.Mat, new Rectangle(weight * j, height * i, weight, height));
+                        images.Add(new OneImageParams()
+                        {
+                            array = roi.ToImage<Bgr, byte>().ToJpegData(),
+                            number = number
+                        });
+                        number++;
                         // CvInvoke.Imshow("image", roi);
                         // CvInvoke.WaitKey(0);
                     }

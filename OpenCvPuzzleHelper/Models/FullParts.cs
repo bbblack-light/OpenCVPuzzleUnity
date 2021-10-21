@@ -7,7 +7,7 @@ namespace DefaultNamespace
     public class FullParts
     {
         public string filename;
-        public List<byte[]> images;
+        public List<OneImageParams> images;
         public int height;
         public int width;
     }

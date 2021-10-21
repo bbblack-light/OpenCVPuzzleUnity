@@ -20,13 +20,20 @@ namespace Models
         public static int cols;
         public static int rows;
         
-        public List<byte[]> images;
+        public List<OneByteImage> images;
         public int height;
         public int width;
 
         public FullParts()
         {
-            images = new List<byte[]>();
+            images = new List<OneByteImage>();
         }
+    }
+
+    [Serializable]
+    public class OneByteImage
+    {
+        public byte[] array;
+        public int number;
     }
 }
