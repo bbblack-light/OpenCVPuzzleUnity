@@ -21,9 +21,10 @@ public class MainLoadPanelComponent : MonoBehaviour
     private NetworkStream _stream;
     public ImageParameters imageParameters;
 
-    private void Awake()
+    public void Initialize()
     {
         gameObject.SetActive(true);
+        PropertyPanel.SetActive(true);
         PleaseWait.SetActive(false);
         
         Button.onClick.AddListener(Call);
@@ -107,5 +108,11 @@ public class MainLoadPanelComponent : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        StopCoroutine(Receive());
+        MySprites.SpritesLoaded -= SpritesLoaded;
     }
 }

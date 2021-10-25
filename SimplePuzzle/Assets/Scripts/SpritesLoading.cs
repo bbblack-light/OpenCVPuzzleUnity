@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using System;
+using Models;
 using UnityEngine;
 
 public class SpritesLoading : MonoBehaviour
@@ -13,8 +14,8 @@ public class SpritesLoading : MonoBehaviour
         MySprites.Instance.LoadSprites();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        FullParts.FileNameReceived += FileNameReceived;
+        FullParts.FileNameReceived -= FileNameReceived;
     }
 }

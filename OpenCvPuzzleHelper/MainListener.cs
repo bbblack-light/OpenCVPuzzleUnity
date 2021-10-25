@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -18,6 +19,7 @@ namespace OpenCvPuzzleHelper
         //for receive
         private static TcpListener Server;
         private static NetworkStream stream;
+        private static List<string> filenames = new List<string>();
         static void Main(string[] args)
         {
             ImageParameters parameters = new ImageParameters()
@@ -35,7 +37,6 @@ namespace OpenCvPuzzleHelper
 
         private static void StartListen()
         {
-            string filename = String.Empty;
             FileStream file;
             IPAddress localAddr = IPAddress.Parse("127.0.0.1");
             int port = 8888;
@@ -59,11 +60,16 @@ namespace OpenCvPuzzleHelper
                         ImageParameters imageParameters = JsonConvert.DeserializeObject<ImageParameters>(message);
                         fullParts = ImageProcessing.CutImage(imageParameters);
                         var resString = JsonConvert.SerializeObject(fullParts);
+                        if (File.Exists(fullParts.filename + ".txt"))
+                        {
+                            File.Delete(fullParts.filename + ".txt");
+                        }
                         
                         file = File.Create(fullParts.filename + ".txt");
                         file.Write(Encoding.ASCII.GetBytes(resString));
                         Console.WriteLine(file.Name);
                         // filename = AppDomain.CurrentDomain.BaseDirectory + file.Name;
+                        filenames.Add(file.Name);
                         var filenameBytes = Encoding.ASCII.GetBytes(file.Name);
                         stream.Write(filenameBytes, 0, filenameBytes.Length);
                         file.Close();
@@ -77,7 +83,13 @@ namespace OpenCvPuzzleHelper
             }
             finally
             {
-                if (filename != String.Empty) File.Delete(filename);
+                foreach (var filename in filenames)
+                {
+                    if (filename != String.Empty && File.Exists(filename))
+                    {
+                        File.Delete(filename);
+                    }
+                }
                 Console.WriteLine("Server closed");
             }
         }
